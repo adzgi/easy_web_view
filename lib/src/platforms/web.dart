@@ -62,11 +62,22 @@ class BrowserWebViewState extends WebViewState<BrowserWebView> {
         ..height = height.toInt().toString()
         ..width = width.toInt().toString();
 
+      /////// PERSONALIZACIÓN IGESSHOP //////
+      html.window.onMessage.forEach((element) {
+        print('Event Received in callback: ${element.data}');
+        if (element.data == 'PAGOOK') {
+          widget.options.onResultadoPago!(true);
+          //Navigator.pop(context);
+        } else if (element.data == 'PAGOERROR') {
+          widget.options.onResultadoPago!(false);
+        }
+      });
+      ////// FIN PERSONALIZACIÓN ///////
+
       html.window.addEventListener('onbeforeunload', (event) async {
         final beforeUnloadEvent = (event as html.BeforeUnloadEvent);
         if (widget.options.navigationDelegate == null) return;
-        final webNavigationDecision = await widget.options.navigationDelegate!(
-            WebNavigationRequest(html.window.location.href));
+        final webNavigationDecision = await widget.options.navigationDelegate!(WebNavigationRequest(html.window.location.href));
         if (webNavigationDecision == WebNavigationDecision.prevent) {
           // Cancel the event
           beforeUnloadEvent.preventDefault();
@@ -132,6 +143,5 @@ class EasyWebViewControllerWrapper extends EasyWebViewControllerWrapperBase {
   Object get nativeWrapper => _iframe;
 
   @override
-  void postMessageWeb(dynamic message, String targetOrigin) =>
-      _iframe.contentWindow?.postMessage(message, targetOrigin);
+  void postMessageWeb(dynamic message, String targetOrigin) => _iframe.contentWindow?.postMessage(message, targetOrigin);
 }

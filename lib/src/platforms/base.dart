@@ -2,17 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_windows/webview_windows.dart'
-    show WebviewPopupWindowPolicy;
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart'
-    show
-        WidgetFactory,
-        CustomStylesBuilder,
-        CustomWidgetBuilder,
-        OnErrorBuilder,
-        OnLoadingBuilder,
-        ImageMetadata,
-        RenderMode;
+import 'package:webview_windows/webview_windows.dart' show WebviewPopupWindowPolicy;
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart' show WidgetFactory, CustomStylesBuilder, CustomWidgetBuilder, OnErrorBuilder, OnLoadingBuilder, ImageMetadata, RenderMode;
 
 import 'package:flutter/material.dart';
 
@@ -36,9 +27,7 @@ abstract class WebView extends StatefulWidget {
 class WebViewState<T extends WebView> extends State<T> {
   @override
   void didUpdateWidget(T oldWidget) {
-    if (oldWidget.src != widget.src ||
-        oldWidget.height != widget.height ||
-        oldWidget.width != widget.width) {
+    if (oldWidget.src != widget.src || oldWidget.height != widget.height || oldWidget.width != widget.width) {
       if (mounted) setState(() {});
     }
     super.didUpdateWidget(oldWidget);
@@ -70,8 +59,7 @@ class WebNavigationRequest {
   final String url;
 }
 
-typedef FutureOr<WebNavigationDecision> WebNavigationDelegate(
-    WebNavigationRequest webNavigationRequest);
+typedef FutureOr<WebNavigationDecision> WebNavigationDelegate(WebNavigationRequest webNavigationRequest);
 
 class CrossWindowEvent {
   final String name;
@@ -103,6 +91,7 @@ class WebViewOptions {
   final WindowsWebViewOptions windows;
   final MarkdownOptions markdown;
   final WidgetsWebViewOptions widgets;
+  final void Function(bool resultado)? onResultadoPago;
 
   const WebViewOptions({
     this.navigationDelegate,
@@ -112,6 +101,7 @@ class WebViewOptions {
     this.windows = const WindowsWebViewOptions(),
     this.markdown = const MarkdownOptions(),
     this.widgets = const WidgetsWebViewOptions(),
+    this.onResultadoPago,
   });
 }
 
