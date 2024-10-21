@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_windows/webview_windows.dart' show WebviewPopupWindowPolicy;
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart' show WidgetFactory, CustomStylesBuilder, CustomWidgetBuilder, OnErrorBuilder, OnLoadingBuilder, ImageMetadata, RenderMode;
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart' show WidgetFactory, CustomStylesBuilder, CustomWidgetBuilder, OnErrorBuilder, OnLoadingBuilder, ImageMetadata, RenderMode;
 
 import 'package:flutter/material.dart';
 
