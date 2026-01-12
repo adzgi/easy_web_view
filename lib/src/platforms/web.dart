@@ -1,7 +1,8 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:async';
 import 'dart:html' as html;
-import 'dart:ui' as ui;
+import 'dart:ui' as ui show Size;
+import 'dart:ui_web' as ui_web;
 
 import 'package:flutter/material.dart';
 
@@ -47,8 +48,7 @@ class BrowserWebViewState extends WebViewState<BrowserWebView> {
 
   void setup(String? src, double width, double height) {
     final key = widget.key ?? ValueKey('');
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory('iframe-$url', (int viewId) {
+    ui_web.platformViewRegistry.registerViewFactory('iframe-$url', (int viewId) {
       if (_iframeElementMap[key] == null) {
         _iframeElementMap[key] = html.IFrameElement();
       }
